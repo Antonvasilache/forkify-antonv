@@ -78,7 +78,6 @@ export const getSearchResultsPage = function (page = state.search.page) {
 export const updateServings = function (newServings) {
   state.recipe.ingredients.forEach(ing => {
     ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
-    //newQt = oldQt * newServings / oldServings // 2 * 8 / 4 = 4
   });
 
   state.recipe.servings = newServings;
@@ -124,7 +123,6 @@ export const uploadRecipe = async function (newRecipe) {
     const ingredients = Object.entries(newRecipe)
       .filter(entry => entry[0].startsWith(`ingredient`) && entry[1] !== ``)
       .map(ing => {
-        // const ingArr = ing[1].replaceAll(` `, ``).split(`,`);
         const ingArr = ing[1].split(`,`).map(el => el.trim());
         if (ingArr.length !== 3)
           throw new Error(
